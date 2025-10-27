@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz de Matemática</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #74ebd5, #ACB6E5);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .quiz-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 350px;
+    }
+    h1 {
+      color: #333;
+    }
+    #progresso {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #next-btn {
+      background-color: #2196F3;
+      display: none;
+    }
+    #next-btn:hover {
+      background-color: #0b7dda;
+    }
+    #resultado {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    @media (max-width: 400px) {
+      .quiz-box {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-box">
+    <h1>Quiz de Matemática 🧮</h1>
+    <p id="progresso"></p>
+    <p id="pergunta"></p>
+    <div id="opcoes"></div>
+    <p id="resultado"></p>
+    <button id="next-btn">Próxima</button>
+  </div>
+
+  <script>
+    const perguntas = [
+      { texto: "Quanto é 5 + 7?", opcoes: ["10", "12", "13", "11"], correta: 1 },
+      { texto: "Qual é o dobro de 9?", opcoes: ["16", "18", "20", "19"], correta: 1 },
+      { texto: "Quanto é 6 x 8?", opcoes: ["42", "46", "48", "50"], correta: 2 },
+      { texto: "Qual é a raiz quadrada de 81?", opcoes: ["7", "8", "9", "10"], correta: 2 },
+      { texto: "Quanto é 15 - 6?", opcoes: ["8", "9", "10", "11"], correta: 1 },
+      // Perguntas mais difíceis 👇
+      { texto: "Qual é o valor de x em 2x + 4 = 10?", opcoes: ["x = 2", "x = 3", "x = 4", "x = 5"], correta: 2 },
+      { texto: "Quanto é (3² + 4²)?", opcoes: ["12", "25", "18", "20"], correta: 1 },
+      { texto: "Quanto é 1/2 + 2/3?", opcoes: ["7/6", "3/5", "5/6", "4/5"], correta: 0 },
+      { texto: "Quanto é (10² - 6²) / 4?", opcoes: ["16", "20", "18", "14"], correta: 1 },
+      { texto: "Se 5x = 3x + 12, quanto vale x?", opcoes: ["4", "6", "8", "12"], correta: 0 }
+    ];
+
+    let indice = 0;
+    let pontuacao = 0;
+
+    const perguntaEl = document.getElementById("pergunta");
+    const opcoesEl = document.getElementById("opcoes");
+    const resultadoEl = document.getElementById("resultado");
+    const botaoProxima = document.getElementById("next-btn");
+    const progressoEl = document.getElementById("progresso");
+
+    function mostrarPergunta() {
+      const perguntaAtual = perguntas[indice];
+      progressoEl.textContent = `Pergunta ${indice + 1} de ${perguntas.length}`;
+      perguntaEl.textContent = perguntaAtual.texto;
+      opcoesEl.innerHTML = "";
+      resultadoEl.textContent = "";
+      botaoProxima.style.display = "none";
+
+      perguntaAtual.opcoes.forEach((opcao, i) => {
+        const botao = document.createElement("button");
+        botao.textContent = opcao;
+        botao.onclick = () => verificarResposta(i);
+        opcoesEl.appendChild(botao);
+      });
+    }
+
+    function verificarResposta(i) {
+      const correta = perguntas[indice].correta;
+      Array.from(opcoesEl.children).forEach((b, index) => {
+        if (index === correta) b.style.backgroundColor = "#4CAF50"; // verde
+        else if (index === i) b.style.backgroundColor = "#f44336"; // vermelho se errada
+        b.disabled = true;
+      });
+
+      if (i === correta) {
+        resultadoEl.textContent = "✅ Correto!";
+        pontuacao++;
+      } else {
+        resultadoEl.textContent = "❌ Errado!";
+      }
+
+      botaoProxima.style.display = "inline-block";
+    }
+
+    botaoProxima.onclick = () => {
+      indice++;
+      if (indice < perguntas.length) {
+        mostrarPergunta();
+      } else {
+        mostrarResultadoFinal();
+      }
+    };
+
+    function mostrarResultadoFinal() {
+      perguntaEl.textContent = "Quiz finalizado!";
+      opcoesEl.innerHTML = "";
+      resultadoEl.textContent = `Você acertou ${pontuacao} de ${perguntas.length} perguntas. 🎯`;
+      progressoEl.textContent = "";
+      botaoProxima.textContent = "Reiniciar";
+      botaoProxima.style.display = "inline-block";
+      botaoProxima.onclick = reiniciarQuiz;
+    }
+
+    function reiniciarQuiz() {
+      indice = 0;
+      pontuacao = 0;
+      botaoProxima.textContent = "Próxima";
+      mostrarPergunta();
+    }
+
+    mostrarPergunta();
+  </script>
+</body>
+</html>
