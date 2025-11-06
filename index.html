@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz de Matemática</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz de Porcentagem</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="quiz-box">
-    <h1>Quiz de Matemática 🧮</h1>
-    <p id="progresso"></p>
-    <p id="pergunta"></p>
-    <div id="opcoes"></div>
-    <p id="resultado"></p>
-    <button id="next-btn">Próxima</button>
+  <div class="container">
+    <h2>🏆 Quiz de Porcentagem</h2>
+
+    <!-- Tela inicial -->
+    <div id="inicio">
+      <p>Digite seu nome para começar:</p>
+      <input type="text" id="nomeJogador" placeholder="Seu nome" />
+      <br /><br />
+      <button onclick="iniciarJogo()">Começar</button>
+    </div>
+
+    <!-- Quiz -->
+    <div id="quiz" style="display:none;">
+      <h3 id="pergunta"></h3>
+      <div id="opcoes"></div>
+      <p id="feedback"></p>
+      <button id="proximoBtn" onclick="proximaQuestao()">Próxima</button>
+    </div>
+
+    <!-- Resultado final -->
+    <div id="resultado" style="display:none;">
+      <h3 id="mensagemFinal"></h3>
+      <button onclick="reiniciar()">Jogar novamente</button>
+      <div id="ranking"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>

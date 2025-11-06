@@ -1,66 +1,77 @@
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(120deg, #74ebd5, #ACB6E5);
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-}
-
-.quiz-box {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  text-align: center;
-  width: 350px;
-}
-
-h1 {
+  background-color: #eef1f5;
   color: #333;
+  text-align: center;
+  padding: 20px;
 }
 
-#progresso {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
+.container {
+  max-width: 400px; /* caixa menor */
+  margin: 0 auto;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 button {
-  display: block;
-  width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  background-color: #4CAF50;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 8px;
+  padding: 10px 18px;
+  margin-top: 15px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s;
+  font-size: 15px;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
-#next-btn {
-  background-color: #2196F3;
+input[type="text"] {
+  padding: 8px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#proximoBtn {
   display: none;
 }
 
-#next-btn:hover {
-  background-color: #0b7dda;
-}
-
-#resultado {
-  margin-top: 15px;
+.correto {
+  color: #28a745;
   font-weight: bold;
 }
 
-@media (max-width: 400px) {
-  .quiz-box {
-    width: 90%;
-    padding: 20px;
-  }
+.errado {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.opcao-certa {
+  background-color: #d4edda;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.opcao-errada {
+  background-color: #f8d7da;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#ranking {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#ranking h3 {
+  text-align: center;
+}
+
+#ranking ol {
+  padding-left: 20px;
 }
